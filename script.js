@@ -18,12 +18,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const fourSoundsStructures = [
         { type: 'Maj7', intervals: [4, 3, 4], inversion: 'PF' },
         { type: 'Min7', intervals: [3, 4, 3], inversion: 'PF' },
+        { type: '7', intervals: [4, 3, 3], inversion: 'PF' },
+
         { type: 'Maj7', intervals: [3, 4, 1], inversion: 'R1' },
         { type: 'Min7', intervals: [4, 3, 2], inversion: 'R1' },
+        { type: '7', intervals: [3, 3, 2], inversion: 'R1' },
+
         { type: 'Maj7', intervals: [4, 1, 4], inversion: 'R2' },
         { type: 'Min7', intervals: [3, 2, 3], inversion: 'R2' },
+        { type: '7', intervals: [3, 2, 4], inversion: 'R2' },
+
         { type: 'Maj7', intervals: [1, 4, 3], inversion: 'R3' },
         { type: 'Min7', intervals: [2, 3, 4], inversion: 'R3' },
+        { type: '7', intervals: [2, 4, 3], inversion: 'R3' },
     
         // Maj7 D2 inversions
         { type: 'Maj7 D2', intervals: [7, 4, 5], inversion: 'PF' },
@@ -51,7 +58,15 @@ document.addEventListener('DOMContentLoaded', () => {
         { type: '7sus4 D2', intervals: [7, 3, 7], inversion: 'PF' },
         { type: '7sus4 D2', intervals: [5, 2, 7], inversion: 'R1' },
         { type: '7sus4 D2', intervals: [5, 5, 5], inversion: 'R2' },
-        { type: '7sus4 D2', intervals: [7, 2, 5], inversion: 'R3' }
+        { type: '7sus4 D2', intervals: [7, 2, 5], inversion: 'R3' },
+
+        // 7 D2 inversions
+        { type: '7 D2', intervals: [7, 3, 6], inversion: 'PF' },
+        { type: '7 D2', intervals: [6, 2, 7], inversion: 'R1' },
+        { type: '7 D2', intervals: [5, 4, 6], inversion: 'R2' },
+        { type: '7 D2', intervals: [6, 3, 5], inversion: 'R3' },
+
+
     ];
     
     const triads = [
@@ -59,11 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'Minor 7', label: 'Min7' },
         { name: '7sus4', label: '7sus4' },
         { name: 'Diminished 7', label: 'Dim7' },
+        { name: '7', label: '7' },
 
         { name: 'Major 7 D2', label: 'Maj7 D2' },
         { name: 'Minor 7 D2', label: 'Min7 D2' },
         { name: '7sus4 D2', label: '7sus4 D2' },
         { name: 'Diminished 7 D2', label: 'Dim7 D2' },
+        { name: '7 D2', label: '7 D2' },
+
             ];
     
     const inversions = ['Root Position', 'First Inversion', 'Second Inversion', 'Third Inversion'];
@@ -251,6 +269,11 @@ document.addEventListener('DOMContentLoaded', () => {
             triadType = 'Min7';
             inversion = 'PF';
         }
+        // 7 PF
+        else if (interval1 === 4 && interval2 === 3 && interval3 === 3) {
+            triadType = '7';
+            inversion = 'PF';
+        }
         // Maj7 R1
         else if (interval1 === 3 && interval2 === 4 && interval3 === 1) {
             triadType = 'Maj7';
@@ -262,6 +285,12 @@ document.addEventListener('DOMContentLoaded', () => {
             triadType = 'Min7';
             inversion = 'R1';
             fundamental = note4.slice(0, -1);
+        }
+         // 7 R1
+         else if (interval1 === 3 && interval2 === 3 && interval3 === 2) {
+            triadType = '7';
+            inversion = 'R1';
+            fundamental = note4.slice(0, -1);   
         }
         // Maj7 R2
         else if (interval1 === 4 && interval2 === 1 && interval3 === 4) {
@@ -275,6 +304,12 @@ document.addEventListener('DOMContentLoaded', () => {
             inversion = 'R2';
             fundamental = note3.slice(0, -1);
         }
+        // 7 R2
+        else if (interval1 === 3 && interval2 === 2 && interval3 === 4) {
+            triadType = '7';
+            inversion = 'R2';
+            fundamental = note3.slice(0, -1);
+        }
         // Maj7 R3
         else if (interval1 === 1 && interval2 === 4 && interval3 === 3) {
             triadType = 'Maj7';
@@ -284,6 +319,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Min7 R3
         else if (interval1 === 2 && interval2 === 3 && interval3 === 4) {
             triadType = 'Min7';
+            inversion = 'R3';
+            fundamental = note2.slice(0, -1);
+        }
+        // 7 R3
+        else if (interval1 === 2 && interval2 === 4 && interval3 === 3) {
+            triadType = '7';
             inversion = 'R3';
             fundamental = note2.slice(0, -1);
         }
@@ -306,7 +347,7 @@ document.addEventListener('DOMContentLoaded', () => {
         else if (interval1 === 7 && interval2 === 1 && interval3 === 7) {
             triadType = 'Maj7 D2';
             inversion = 'R1';
-            fundamental = note4.slice(0, -1);
+            fundamental = note3.slice(0, -1);
         }
         // Maj7 D2 R2
         else if (interval1 === 5 && interval2 === 4 && interval3 === 7) {
@@ -318,7 +359,7 @@ document.addEventListener('DOMContentLoaded', () => {
         else if (interval1 === 5 && interval2 === 3 && interval3 === 5) {
             triadType = 'Maj7 D2';
             inversion = 'R3';
-            fundamental = note2.slice(0, -1);
+            fundamental = note4.slice(0, -1);
         }
         // Min7 D2 PF
         else if (interval1 === 7 && interval2 === 3 && interval3 === 5) {
@@ -329,19 +370,19 @@ document.addEventListener('DOMContentLoaded', () => {
         else if (interval1 === 7 && interval2 === 2 && interval3 === 7) {
             triadType = 'Min7 D2';
             inversion = 'R1';
-            fundamental = note4.slice(0, -1); // Mise à jour pour l’accord D2
+            fundamental = note3.slice(0, -1); // Mise à jour pour l’accord D2
         }
         // Min7 D2 R2
         else if (interval1 === 5 && interval2 === 3 && interval3 === 7) {
             triadType = 'Min7 D2';
             inversion = 'R2';
-            fundamental = note3.slice(0, -1);
+            fundamental = note2.slice(0, -1);
         }
         // Min7 D2 R3
         else if (interval1 === 5 && interval2 === 4 && interval3 === 5) {
             triadType = 'Min7 D2';
             inversion = 'R3';
-            fundamental = note2.slice(0, -1);
+            fundamental = note4.slice(0, -1);
         }
         // 7sus4 PF
         else if (interval1 === 5 && interval2 === 2 && interval3 === 3) {
@@ -375,19 +416,44 @@ document.addEventListener('DOMContentLoaded', () => {
         else if (interval1 === 5 && interval2 === 2 && interval3 === 7) {
             triadType = '7sus4 D2';
             inversion = 'R1';
-            fundamental = note4.slice(0, -1);
+            fundamental = note3.slice(0, -1);
         }
         // 7sus4 D2 R2
         else if (interval1 === 5 && interval2 === 5 && interval3 === 5) {
             triadType = '7sus4 D2';
             inversion = 'R2';
-            fundamental = note3.slice(0, -1);
+            fundamental = note2.slice(0, -1);
         }
         // 7sus4 D2 R3
         else if (interval1 === 7 && interval2 === 2 && interval3 === 5) {
             triadType = '7sus4 D2';
             inversion = 'R3';
+            fundamental = note4.slice(0, -1);
+
+        }
+        // 7 D2 PF
+        else if (interval1 === 7 && interval2 === 3 && interval3 === 6) {
+            triadType = '7 D2';
+            inversion = 'PF';
+        }
+         // 7 D2 R1
+            else if (interval1 === 6 && interval2 === 2 && interval3 === 7) {
+                triadType = '7 D2';
+                inversion = 'R1';
+                fundamental = note3.slice(0, -1);
+            }
+        // 7 D2 R2
+        else if (interval1 === 5 && interval2 === 4 && interval3 === 6) {
+            triadType = '7 D2';
+            inversion = 'R2';
             fundamental = note2.slice(0, -1);
+        }
+        // 7 D2 R3
+        else if (interval1 === 6 && interval2 === 3 && interval3 === 5) {
+            triadType = '7 D2';
+            inversion = 'R3';
+            fundamental = note4.slice(0, -1);
+         
         } else {
             console.error("Aucune correspondance trouvée pour l'accord analysé.");
         }
